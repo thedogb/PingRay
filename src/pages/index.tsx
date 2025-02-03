@@ -1,115 +1,92 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+import { useState } from "react";
+import ArticleCard from "@/components/ArticleCard";
+import Pagination from "@/components/Pagination";
+import Layout from "@/components/Layout";
+import { NextSeo } from "next-seo";
+import { Config } from "@/config";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// import { articles } from '@/data/footerData'
+import {
+  getAllPostTitles,
+  getAllPostTagSet,
+  getSortedPostsData,
+  ParsedMarkdown,
+} from "@/utils/posts";
 
-export default function Home() {
+interface HomeProps {
+  allPostTitles: { title: string; id: string }[];
+  allPostTagSet: string[];
+  allArticles: ParsedMarkdown[];
+}
+
+export async function getStaticProps() {
+  const allPostTitles = getAllPostTitles();
+  const allPostTagSet = getAllPostTagSet();
+  const allArticles = getSortedPostsData();
+  return {
+    props: {
+      allPostTitles,
+      allPostTagSet,
+      allArticles,
+    },
+  };
+}
+
+export default function Home({ allArticles }: HomeProps) {
+  const articlesPerPage = 12; // 每页文章数
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(allArticles.length / articlesPerPage);
+  const currentArticles = allArticles.slice(
+    (currentPage - 1) * articlesPerPage,
+    currentPage * articlesPerPage,
+  );
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <NextSeo
+        title={Config.SITE_NAME}
+        description={Config.SITE_DESCRIPTION}
+        canonical={Config.SITE_URL}
+        openGraph={{
+          url: Config.SITE_URL,
+          title: Config.SITE_NAME,
+          description: Config.SITE_DESCRIPTION,
+          images: [
+            {
+              url: Config.SITE_URL + Config.SITE_IMAGE, // 这里不需要 {}
+              width: 800,
+              height: 600,
+              alt: Config.SITE_NAME, // 这里不需要 {}
+            },
+          ],
+          site_name: Config.SITE_NAME,
+        }}
+      />
+      <Layout>
+        <div className="min-h-screen  w-full pt-[120px] px-[20px]  ">
+          <div className="max-w-[900px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 my-0 mx-auto">
+            {currentArticles.map((article, index) => (
+              <ArticleCard
+                key={index}
+                title={article.title || ""}
+                date={article.createdAt || ""}
+                category={article.category || ""}
+                image={article.firstImage || ""}
+                description={article.description || ""}
+                id={article.id || ""}
+              />
+            ))}
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* 分页组件 */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </Layout>
+    </>
+    // {/* <Footer recentPosts={allPostTitles} hotTags={allPostTagSet} /> */}
   );
 }

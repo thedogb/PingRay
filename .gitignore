@@ -38,3 +38,62 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Node.js 相关
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Next.js 构建输出
+.next/
+out/
+dist/
+
+# TypeScript 编译文件（通常不会生成，但以防万一）
+*.tsbuildinfo
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# 日志文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+turbo-debug.log*
+
+# Editor 相关（避免编辑器配置文件污染）
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# MacOS 相关垃圾文件
+.DS_Store
+
+# Tailwind CSS JIT 模式可能生成的缓存文件
+.tailwind/
+
+# ESLint & Prettier 缓存
+eslintcache
+.prettiercache
+
+# Husky hooks（如果你使用了 Husky）
+.husky/_
+
+# GitHub Actions 缓存（如果你使用 GitHub Actions）
+.github/workflows/*.log
+
+# Jest & Testing Library 临时文件
+coverage/
+jest.cache/
+.vitest/
