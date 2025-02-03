@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import SocialLinks from "./SocialLinks";
 import { useEffect, useState } from "react";
+import { Config } from "@/config"
 
 // interface FooterProps {
 //     recentPosts: {title: string, id: string}[];
@@ -81,12 +82,12 @@ const Footer: React.FC = () => {
             <div>
               <p className="text-[13px] leading-[20px] m-0 text-grayCustom">
                 {"Theme is "}
-                <Link href="#" target="_blank" className="text-[#767676]">
-                  Pinghsu
+                <Link href="https://github.com/thedogb/PingRay" target="_blank" className="text-[#767676]">
+                  PingRay
                 </Link>
                 {" by "}
                 <Link
-                  href="https://thedoga.tech"
+                  href={Config.SITE_URL}
                   target="_blank"
                   className="text-[#767676]"
                 >
