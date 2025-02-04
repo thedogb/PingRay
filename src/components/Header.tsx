@@ -93,7 +93,7 @@ const Header = () => {
               <li className="relative inline mx-0 my-0 no-underline">
                 {" "}
                 <a
-                  href=""
+                  href="/category/杂七杂八"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   杂七杂八
@@ -102,7 +102,7 @@ const Header = () => {
               <li className="relative inline mx-0 my-0 no-underline">
                 {" "}
                 <a
-                  href=""
+                  href="/category/随笔"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   随笔
@@ -111,7 +111,7 @@ const Header = () => {
               <li className="relative inline mx-0 my-0 no-underline">
                 {" "}
                 <a
-                  href=""
+                  href="/about"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   关于
@@ -120,7 +120,7 @@ const Header = () => {
               <li className="relative inline mx-0 my-0 no-underline">
                 {" "}
                 <a
-                  href=""
+                  href="/link"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   友链
