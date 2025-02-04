@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* 上一页 */}
         {currentPage > 1 && (
           <button
-            className={`text-gray-500 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:text-gray-700"}`}
+            className={`border-none bg-[#f7f7f7] text-gray-500 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:text-gray-700"}`}
             onClick={handlePrevious}
             disabled={currentPage === 1}
           >
@@ -57,7 +57,7 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* 下一页 */}
         {currentPage < totalPages && (
           <button
-            className={`text-gray-500 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:text-gray-700"}`}
+            className={`border-none bg-[#f7f7f7] text-gray-500 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:text-gray-700"}`}
             onClick={handleNext}
             disabled={currentPage === totalPages}
           >
