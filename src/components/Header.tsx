@@ -91,40 +91,37 @@ const Header = () => {
             </span>
             <ul className="absolute z-1 top-[100%] my-sr-only group-hover:not-my-sr-only-ul group-active:not-my-sr-only-ul group-focus:not-my-sr-only-ul my-0 mr-0 ml-[-95px] px-0 py-0 transition-transform duration-300 transform translate-x-30 indent-0 ">
               <li className="relative inline mx-0 my-0 no-underline">
-                {" "}
-                <a
+                <Link
                   href="/category/杂七杂八"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   杂七杂八
-                </a>{" "}
+                </Link>
               </li>
               <li className="relative inline mx-0 my-0 no-underline">
-                {" "}
-                <a
+                <Link
                   href="/category/随笔"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   随笔
-                </a>{" "}
+                </Link>
               </li>
               <li className="relative inline mx-0 my-0 no-underline">
-                {" "}
-                <a
+                <Link
                   href="/about"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   关于
-                </a>{" "}
+                </Link>{" "}
               </li>
               <li className="relative inline mx-0 my-0 no-underline">
                 {" "}
-                <a
-                  href="/link"
+                <Link
+                  href="/links"
                   className="text-[15px] leading-[2.2] block w-[140px] m-0 py-[8px] px-[25px] bg-white"
                 >
                   友链
-                </a>{" "}
+                </Link>{" "}
               </li>
             </ul>
           </nav>
