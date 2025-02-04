@@ -44,9 +44,10 @@ const Pagination: React.FC<PaginationProps> = ({
           return (
             <button
               key={page}
-              className={`px-2 py-1 border-none bg-[#f7f7f7] ${
-                currentPage === page ? "text-red-500 font-bold" : "text-gray-500 hover:text-gray-700"
-              }`}
+              className={`px-2 py-1 border-none bg-[#f7f7f7] 
+                ${ currentPage === page ? "text-red-500 font-bold" : "text-gray-500 hover:text-gray-700" }
+                ${ totalPages === 1 ? "hidden" : ""}
+                `}
               onClick={() => onPageChange(page)}
             >
               {page}
