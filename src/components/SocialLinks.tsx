@@ -1,4 +1,5 @@
 import React from "react";
+import {Config} from "@/config"
 
 const SocialLinks: React.FC = () => {
   return (
@@ -7,7 +8,7 @@ const SocialLinks: React.FC = () => {
         max-[650px]:hidden"
     >
       <a
-        href="/"
+        href={Config.SITE_URL + "/rss.xml"}
         target="_blank"
         rel="noopener noreferrer"
         className=" px-[25px] text-[#5f5f5f] text-[13px] font-sans
@@ -16,7 +17,7 @@ const SocialLinks: React.FC = () => {
         RSS
       </a>
       <a
-        href="https://github.com/"
+        href="https://github.com/thedogb"
         target="_blank"
         rel="noopener noreferrer"
         className="px-[25px] text-[#5f5f5f] text-[13px] font-sans
