@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import Article from "@/components/Article";
 import fs from "fs";
 import { GetStaticProps } from "next";
+import { getAllPostTagSet, getRecentPostsTitleAndLink } from "@/utils/posts";
 
 export const getStaticProps: GetStaticProps = async () => {
   const filePath = __filename; // 获取当前文件路径
@@ -13,10 +14,15 @@ export const getStaticProps: GetStaticProps = async () => {
     year: "numeric", // "2024"
   }); // 转换为 ISO 格式
 
+  const recentPosts = getRecentPostsTitleAndLink()
+  const hotTags= getAllPostTagSet()
+
   return {
     props: {
       lastModifiedISOTime,
       lastModifiedLocaleTime,
+      recentPosts,
+      hotTags
     },
   };
 };
@@ -24,11 +30,15 @@ export const getStaticProps: GetStaticProps = async () => {
 interface Props {
   lastModifiedISOTime: string;
   lastModifiedLocaleTime: string;
+  recentPosts: {title: string, id: string}[];
+  hotTags: string[];
 }
 
 const BlogPost: React.FC<Props> = ({
   lastModifiedLocaleTime,
   lastModifiedISOTime,
+  recentPosts,
+  hotTags
 }) => {
   const content = `
 <ul>
@@ -57,7 +67,7 @@ const BlogPost: React.FC<Props> = ({
     `;
 
   return (
-    <Layout>
+    <Layout recentPosts={recentPosts} hotTags={hotTags}>
       <div className="flex w-full justify-center bg-white">
         <main className="w-full max-w-[700px] pt-[130px] pb-[20px] px-[25px] animate-fadeIn">
           <h1 className="text-[21px]">友链</h1>

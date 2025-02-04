@@ -1,73 +1,72 @@
 import React from "react";
 import Link from "next/link";
 import SocialLinks from "./SocialLinks";
-import { useEffect, useState } from "react";
 import { Config } from "@/config"
 
-// interface FooterProps {
-//     recentPosts: {title: string, id: string}[];
-//     hotTags: string[];
-// }
-
-interface Item {
-  id: number;
-  title: string;
+interface FooterProps {
+    recentPosts: {title: string, id: string}[];
+    hotTags: string[];
 }
 
-const Footer: React.FC = () => {
+// interface Item {
+//   id: number;
+//   title: string;
+// }
+
+const Footer: React.FC<FooterProps> = ({recentPosts, hotTags}) => {
   const currentYear = new Date().getFullYear(); // 获取当前年份
-  const [recentPosts, setRecentPosts] = useState<Item[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+//   const [recentPosts, setRecentPosts] = useState<Item[]>([]);
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const [error, setError] = useState<string | null>(null);
 
-  const [hotTags, setHotTags] = useState<string[]>([]);
-  const [hotTagsLoading, setHotTagsLoading] = useState<boolean>(true);
-  const [hotTagsError, setHotTagsError] = useState<string | null>(null);
+//   const [hotTags, setHotTags] = useState<string[]>([]);
+//   const [hotTagsLoading, setHotTagsLoading] = useState<boolean>(true);
+//   const [hotTagsError, setHotTagsError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchRecentPosts() {
-      try {
-        const res = await fetch("/api/recent-posts");
-        if (!res.ok) {
-          throw new Error("Failed to fetch recent posts");
-        }
-        const data: Item[] = await res.json();
-        setRecentPosts(data); // 更新状态
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Unknown error"); // 错误处理
-      } finally {
-        setLoading(false); // 数据加载完毕
-      }
-    }
+//   useEffect(() => {
+//     async function fetchRecentPosts() {
+//       try {
+//         const res = await fetch("/api/recent-posts");
+//         if (!res.ok) {
+//           throw new Error("Failed to fetch recent posts");
+//         }
+//         const data: Item[] = await res.json();
+//         setRecentPosts(data); // 更新状态
+//       } catch (err) {
+//         setError(err instanceof Error ? err.message : "Unknown error"); // 错误处理
+//       } finally {
+//         setLoading(false); // 数据加载完毕
+//       }
+//     }
 
-    async function fetchHotTags() {
-      try {
-        const res = await fetch("/api/hot-tags");
-        if (!res.ok) {
-          throw new Error("Failed to fetch hot tags");
-        }
-        const data: string[] = await res.json();
-        setHotTags(data);
-      } catch (err) {
-        setHotTagsError(err instanceof Error ? err.message : "Unknown error");
-      } finally {
-        setHotTagsLoading(false);
-      }
-    }
-    if (hotTagsLoading && hotTagsError) {
-    }
+//     async function fetchHotTags() {
+//       try {
+//         const res = await fetch("/api/hot-tags");
+//         if (!res.ok) {
+//           throw new Error("Failed to fetch hot tags");
+//         }
+//         const data: string[] = await res.json();
+//         setHotTags(data);
+//       } catch (err) {
+//         setHotTagsError(err instanceof Error ? err.message : "Unknown error");
+//       } finally {
+//         setHotTagsLoading(false);
+//       }
+//     }
+//     if (hotTagsLoading && hotTagsError) {
+//     }
 
-    fetchRecentPosts();
-    fetchHotTags();
-  });
+//     fetchRecentPosts();
+//     fetchHotTags();
+//   });
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+//   if (loading) return <div>Loading...</div>;
+//   if (error) return <div>Error: {error}</div>;
 
   return (
     <footer className="bg-white relative z-1 mt-0 pb-[50px] block unicode-isolate">
       <SocialLinks></SocialLinks>
-      <div className="bg-white  pt-[50px] ">
+      <div className="bg-white  pt-[50px]">
         <div
           className="w-full max-w-[960px] h-[250px] mx-auto my-0 py-0 px-[80px] flex
                 max-[880px]:px-0

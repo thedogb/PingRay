@@ -3,10 +3,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 // import { recentPosts, hotTags } from '@/data/footerData';
 
-// import { getAllPostTitles, getAllPostTagSet } from '@/utils/posts'
+// import {getRecentPosts, getAllPostTagSet } from '@/utils/posts'
 
 // export async function getStaticProps() {
-//   const allPostTitles = getAllPostTitles()
+//   const allPostTitles = getRecentPosts(10)
 //   const allPostTagSet = getAllPostTagSet()
 //   return {
 //     props: {
@@ -17,9 +17,11 @@ import Footer from "./Footer";
 
 interface BlogLayoutProps {
   children: React.ReactNode;
+  recentPosts: {title: string, id: string}[];
+  hotTags: string[];
 }
 
-const BlogLayout: React.FC<BlogLayoutProps> = ({ children }) => {
+const BlogLayout: React.FC<BlogLayoutProps> = ({ children, recentPosts, hotTags }) => {
   return (
     <div className="flex flex-col min-h-screen bg-[#f7f7f7]">
       {/* Header */}
@@ -31,7 +33,7 @@ const BlogLayout: React.FC<BlogLayoutProps> = ({ children }) => {
       {/* </main> */}
 
       {/* Footer */}
-      <Footer />
+      <Footer recentPosts={recentPosts} hotTags={hotTags}/>
     </div>
   );
 };

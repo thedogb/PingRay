@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import Article from "@/components/Article";
 import fs from "fs";
 import { GetStaticProps } from "next";
+import { getRecentPostsTitleAndLink, getAllPostTagSet } from "@/utils/posts";
 
 export const getStaticProps: GetStaticProps = async () => {
   const filePath = __filename; // 获取当前文件路径
@@ -13,10 +14,15 @@ export const getStaticProps: GetStaticProps = async () => {
     year: "numeric", // "2024"
   }); // 转换为 ISO 格式
 
+  const recentPosts = getRecentPostsTitleAndLink()
+  const allTagSet = getAllPostTagSet()
+
   return {
     props: {
       lastModifiedISOTime,
       lastModifiedLocaleTime,
+      recentPosts: recentPosts,
+      hotTags: allTagSet
     },
   };
 };
@@ -24,11 +30,15 @@ export const getStaticProps: GetStaticProps = async () => {
 interface Props {
   lastModifiedISOTime: string;
   lastModifiedLocaleTime: string;
+  recentPosts: {title: string, id: string}[];
+  hotTags: string[];
 }
 
 const BlogPost: React.FC<Props> = ({
   lastModifiedLocaleTime,
   lastModifiedISOTime,
+  recentPosts,
+  hotTags,
 }) => {
   const content = `
 istj，有点轴，有自己的想法，尝试了、正在尝试、还想尝试很多事情，目标是为了积攒人生体验。情绪还算稳定，喜欢一首歌，张韶涵的《阿刁》，给过我很多能量。
@@ -43,7 +53,7 @@ istj，有点轴，有自己的想法，尝试了、正在尝试、还想尝试�
     `;
 
   return (
-    <Layout>
+    <Layout recentPosts={recentPosts} hotTags={hotTags}>
       <div className="flex w-full justify-center bg-white">
         <main className="w-full max-w-[700px] pt-[130px] pb-[20px] px-[25px] animate-fadeIn">
           <h1 className="text-[21px]">关于</h1>

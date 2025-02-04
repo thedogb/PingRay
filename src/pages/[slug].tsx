@@ -13,8 +13,8 @@ import {
   getAllPostIds,
   getPostData,
   ParsedMarkdown,
-  getAllPostTitles,
   getAllPostTagSet,
+  getRecentPostsTitleAndLink
 } from "@/utils/posts";
 import { NextSeo } from "next-seo";
 import { Config } from "@/config";
@@ -35,7 +35,7 @@ import { Config } from "@/config";
 interface BlogPostProps {
   content: string;
   blogHeaderData: ParsedMarkdown;
-  allPostTitles: string[];
+  recentPosts: {title: string, id: string}[];
   allPostTagSet: string[];
 }
 
@@ -55,20 +55,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // const htmlContent = await markdownToHtml(content);
   const article = getPostData(`${params?.slug}`);
   const htmlContent = article?.contentHTML || "";
-  const allPostTitles = getAllPostTitles() || [];
   const allPostTagSet = getAllPostTagSet() || [];
+  const recentPosts = getRecentPostsTitleAndLink();
 
   return {
     props: {
       content: htmlContent,
       blogHeaderData: article,
-      allPostTitles: allPostTitles,
+      recentPosts: recentPosts,
       allPostTagSet: allPostTagSet,
     },
   };
 };
 
-const BlogPost: React.FC<BlogPostProps> = ({ content, blogHeaderData }) => {
+const BlogPost: React.FC<BlogPostProps> = ({ content, blogHeaderData, recentPosts, allPostTagSet }) => {
   useEffect(() => {
     const tocHeadroom = new Headroom(
       document.getElementById("directory-content")!,
@@ -118,7 +118,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ content, blogHeaderData }) => {
           site_name: Config.SITE_NAME,
         }}
       />
-      <Layout>
+      <Layout recentPosts={recentPosts} hotTags={allPostTagSet}>
         <ArticleHeader
           title={blogHeaderData.title || ""}
           date={blogHeaderData.createdAt || ""}

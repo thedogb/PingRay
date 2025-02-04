@@ -9,6 +9,8 @@ import {
   getAllPostTypeSet,
   getPostDataByCate,
   ParsedMarkdown,
+  getRecentPostsTitleAndLink,
+  getAllPostTagSet
 } from "@/utils/posts";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -23,10 +25,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const article = getPostDataByCate(`${params?.slug}`);
+  const recentPosts = getRecentPostsTitleAndLink()
+  const allTagSet = getAllPostTagSet()
   return {
     props: {
       category: `${params?.slug}`,
       cateArticles: article,
+      recentPosts: recentPosts,
+      hotTags: allTagSet
     },
   };
 };
@@ -34,9 +40,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 interface CategoryProps {
   category: string;
   cateArticles: ParsedMarkdown[];
+  recentPosts: {title: string, id: string}[];
+    hotTags: string[];
 }
 
-const Category: React.FC<CategoryProps> = ({ category, cateArticles }) => {
+const Category: React.FC<CategoryProps> = ({ category, cateArticles, recentPosts, hotTags }) => {
   const articlesPerPage = 12; // 每页文章数
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -47,7 +55,7 @@ const Category: React.FC<CategoryProps> = ({ category, cateArticles }) => {
   );
   return (
     <>
-      <Layout>
+      <Layout recentPosts={recentPosts} hotTags={hotTags}>
         <div className="flex justify-center w-full">
           <div className="pt-[120px] px-[20px] pb-0 max-w-[940px] w-full">
             <h1

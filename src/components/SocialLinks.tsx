@@ -3,7 +3,7 @@ import React from "react";
 const SocialLinks: React.FC = () => {
   return (
     <div
-      className="w-full border-b border-custom-rgba  py-5 flex justify-center  items-center text-[13px] text-[#5f5f5f] 
+      className="w-full border-b  border-custom-rgba border-solid  py-5 flex justify-center  items-center text-[13px] text-[#5f5f5f] 
         max-[650px]:hidden"
     >
       <a

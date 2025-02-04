@@ -1,9 +1,11 @@
 // import { Feed } from "feed";
 // @ts-expect-error rss 没有声明文件
 import RSS from "rss";
-import { getRecentPosts } from "@/utils/posts";
-import { Config } from "@/config";
-import { GetServerSideProps } from "next";
+import fs from "fs"
+import path from "path"
+import { getRecentPosts } from "../utils/posts";
+import { Config } from "../config";
+// import { GetServerSideProps } from "next";
 // import { NextApiRequest, NextApiResponse } from 'next';
 // import RSS from 'rss';
 
@@ -33,29 +35,32 @@ function generateRSS() {
     });
   });
 
-  //   // 确保 public 目录存在
-  //   const outputDir = path.join(process.cwd(), "public");
-  //   if (!fs.existsSync(outputDir)) {
-  //     fs.mkdirSync(outputDir, { recursive: true });
-  //   }
+    // 确保 public 目录存在
+    const outputDir = path.join(process.cwd(), "public");
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
 
   // 生成 RSS 文件
-  //   fs.writeFileSync(path.join(outputDir, "rss.xml"), feed.rss2());
-  //   console.log("✅ RSS feed generated successfully!");
-  return feed.xml({ indent: true, encoding: "UTF-8" });
+    fs.writeFileSync(path.join(outputDir, "rss.xml"), feed.xml({ indent: true, encoding: "UTF-8" }));
+    console.log("✅ RSS feed generated successfully!");
+  return ;
 }
+
+// generateRSS();
+export default generateRSS;
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  res.setHeader("Content-Type", "application/rss+xml; charset=utf-8");
-  res.write(generateRSS());
-  res.end();
-  return { props: {} };
-};
+// export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+//   res.setHeader("Content-Type", "application/rss+xml; charset=utf-8");
+//   res.write(generateRSS());
+//   res.end();
+//   return { props: {} };
+// };
 
-export default function RSSPage() {
-  return null; // 这个页面不会渲染 HTML
-}
+// export default function RSSPage() {
+//   return null; // 这个页面不会渲染 HTML
+// }
 
 // export default function handler(
 //   req: NextApiRequest,

@@ -7,7 +7,7 @@ import { Config } from "@/config";
 
 // import { articles } from '@/data/footerData'
 import {
-  getAllPostTitles,
+    getRecentPostsTitleAndLink,
   getAllPostTagSet,
   getSortedPostsData,
   ParsedMarkdown,
@@ -20,7 +20,7 @@ interface HomeProps {
 }
 
 export async function getStaticProps() {
-  const allPostTitles = getAllPostTitles();
+  const allPostTitles = getRecentPostsTitleAndLink();
   const allPostTagSet = getAllPostTagSet();
   const allArticles = getSortedPostsData();
   return {
@@ -32,7 +32,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ allArticles }: HomeProps) {
+export default function Home({ allArticles, allPostTitles, allPostTagSet }: HomeProps) {
   const articlesPerPage = 12; // 每页文章数
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -62,7 +62,7 @@ export default function Home({ allArticles }: HomeProps) {
           site_name: Config.SITE_NAME,
         }}
       />
-      <Layout>
+      <Layout recentPosts={allPostTitles} hotTags={allPostTagSet}>
         <div className="min-h-screen  w-full pt-[120px] px-[20px]  ">
           <div className="max-w-[900px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 my-0 mx-auto">
             {currentArticles.map((article, index) => (

@@ -6,6 +6,7 @@ import remarkParse from "remark-parse";
 import remarkFrontmatter from "remark-frontmatter";
 import { parse } from "yaml";
 import { visit } from "unist-util-visit";
+import { Config } from "../config"
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -189,4 +190,9 @@ export function getRecentPosts(num: number) {
     return [];
   }
   return getSortedPostsData().slice(0, num);
+}
+
+export function getRecentPostsTitleAndLink() {
+  const posts = getRecentPosts(Config.RECENT_POSTS_NUM)
+  return posts.map(({title, id}) => ({title, id}))
 }
