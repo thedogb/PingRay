@@ -58,8 +58,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           </p>
         </div>
       </Link>
-      <div className="absolute z-0 right-0 bottom-[50px] left-0 w-[110%] min-h-[100px] bg-black bg-opacity-50 rotate-[-10deg]  -translate-y-[10px] opacity-[.7] shadow-none"></div>
-      <div className="absolute z-0 right-0 bottom-[50px] left-0 w-[110%] min-h-[100px] bg-white rotate-[7deg] -translate-x-[10px]"></div>
+      {/* <div className="absolute z-0 right-0 bottom-[50px] left-0 w-[110%] min-h-[100px] bg-black bg-opacity-50 rotate-[-10deg]  -translate-y-[10px] opacity-[.7] shadow-none"></div> */}
+      <div className="absolute z-10 right-0 bottom-[50px] left-0  w-[110%]  min-h-[100px] bg-black bg-opacity-50 rotate-[-10deg] -translate-y-[10px] opacity-[.7] shadow-none item-slant reverse-slant"></div>
+      <div className="absolute z-0 right-0 bottom-[50px] left-0 w-[110%] min-h-[100px] bg-white rotate-[7deg] -translate-x-[10px] item-slant"></div>
 
       {/* 文字部分 */}
       <div className="relative h-[130px] bg-white pt-[10px] pb-[40px] px-[20px]">
