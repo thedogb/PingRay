@@ -25,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <>
-      <div className="flex justify-center items-center space-x-4 mt-[30px] mb-[35px]">
+      <div className="flex justify-center items-center space-x-4 mt-[30px] mb-[35px] border-none">
         {/* 上一页 */}
         {currentPage > 1 && (
           <button
@@ -44,10 +44,8 @@ const Pagination: React.FC<PaginationProps> = ({
           return (
             <button
               key={page}
-              className={`px-2 py-1 ${
-                currentPage === page
-                  ? "text-red-500 font-bold"
-                  : "text-gray-500 hover:text-gray-700"
+              className={`px-2 py-1 border-none bg-[#f7f7f7] ${
+                currentPage === page ? "text-red-500 font-bold" : "text-gray-500 hover:text-gray-700"
               }`}
               onClick={() => onPageChange(page)}
             >
