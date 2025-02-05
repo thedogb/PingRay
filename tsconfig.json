@@ -26,6 +26,6 @@
     "src/scripts/generateRss.mts",
     "src",
     "src/types"
-  ],
+, "next-sitemap.config.js"  ],
   "exclude": ["node_modules"]
 }
