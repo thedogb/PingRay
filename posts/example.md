@@ -1,5 +1,5 @@
 ---
-title: "Example Title"
+title: "测试 markdown 格式"
 description: "This is an example description"
 tags: ["typescript", "markdown", "parser"]
 category: 杂七杂八
@@ -8,8 +8,6 @@ updatedAt: "1971-12-01"
 ---
 
 ![如何获取无限邮箱](https://cdn.jsdelivr.net/gh/thedogb/pic@master/upic/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%97%A0%E9%99%90%E9%82%AE%E7%AE%B1.png)
-
-# Editor.md
 
 <a href="https://oschina.net">hhh</a>
 
