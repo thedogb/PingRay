@@ -7,13 +7,7 @@ createdAt: "2025-02-05"
 updatedAt: "2020-02-05"
 ---
 
-
-
-
-
-# 迁移网站到nextjs了
-
-
+![网站迁移到nextjs了](https://cdn.jsdelivr.net/gh/thedogb/pic@master/upic/%E7%BD%91%E7%AB%99%E8%BF%81%E7%A7%BB%E5%88%B0nextjs%E4%BA%86.png)
 
 之前 blog 一直用的是 typecho + [pinghsu](https://github.com/chakhsu/pinghsu) 主题，并且部署在自己家里的 NAS 上。说实话，体验挺好的。主题简洁大方，typecho 用作 blog 管理也很方便，后台逻辑清晰易用。但是用到现在还是发现了三个问题：
 
